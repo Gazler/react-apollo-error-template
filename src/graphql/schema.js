@@ -14,6 +14,20 @@ const PersonType = new GraphQLObjectType({
   },
 });
 
+const AddressBookType = new GraphQLObjectType({
+  name: 'AddressBook',
+  fields: {
+    contacts: { type: new GraphQLList(PersonType) }
+  },
+});
+
+const FriendsType = new GraphQLObjectType({
+  name: 'Friends',
+  fields: {
+    contacts: { type: new GraphQLList(PersonType) }
+  },
+});
+
 const peopleData = [
   { id: 1, name: 'John Smith' },
   { id: 2, name: 'Sara Smith' },
@@ -23,10 +37,14 @@ const peopleData = [
 const QueryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    people: {
-      type: new GraphQLList(PersonType),
-      resolve: () => peopleData,
+    addressBook: {
+      type: AddressBookType,
+      resolve: () => ({contacts: peopleData})
     },
+    friends: {
+      type: FriendsType,
+      resolve: () => ({contacts: peopleData})
+    }
   },
 });
 

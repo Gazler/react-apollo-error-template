@@ -2,6 +2,8 @@ import { graphql, print } from "graphql";
 import { ApolloLink, Observable } from "apollo-link";
 import { schema } from "./schema";
 
+console.log(schema);
+
 function delay(ms) {
   return new Promise(resolve => {
     setTimeout(() => {
